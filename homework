@@ -1,0 +1,130 @@
+Python Homework Solutions
+Exercise 1: Print All Divisors of a Number
+מקבלת מספר ובודקת מה המספרים שמבצעים חלוקה ללא שארית עם המספר ובמקרה כזה נדרש לבדוק כמובן מ1 עד המספר עצמו
+number = int(input("Enter a number: "))  # ask the user for input
+print("The divisors of", number, "are:")
+for i in range(1, number + 1):  # Loop to find the numbers from 1 to the input number for check what all divide numbers
+    if number % i == 0:  # Check if 'i' is a divide without remainder
+        print(i)
+
+Exercise 2: Calculate Sum and Average Until Negative Number
+
+מקבל כקלט מספרים ומוצא סכום ממוצע שלהם עד אשר מקבל מספר שלישי ויוצא מהתוכנית
+count = 0  # Initialize count of numbers entered
+total = 0  # Initialize sum of numbers entered
+while True:
+    if count == 0:
+        num = int(input("Please enter number #1: "))  # Ask for the first number
+    else:
+        num = int(input(f"Please enter number #{count + 1} (avg={total / count}. Sum={total}): "))
+    if num < 0:  # Stop if a negative number is entered
+        print("Thank you. Goodbye.")
+        break
+    total += num  # Update sum
+    count += 1  # count of numbers
+
+
+
+
+
+
+
+
+Exercise 3: Stop When Word is Entered Twice in a Row
+מקבלת מילים מהמשתמש ועוצרת כאשר המשתמש הכניס את אותה מילה פעמיים
+word_list = []  # List for the words entered 
+while True:
+    word = input("Please type a word: ").strip().lower()  # Normalize input (remove spaces, lowercase)
+        if word in word_list:  # Check if the word has already entered
+        print(f"You entered the word '{word}' twice. Goodbye...")
+        break
+    word_list.append(word)  # Add word to the list
+
+CHALLENGE SECTION
+היה לא פשוט בכלל באיך לכתוב מבחינת SYNTAX
+בגדול מקבל מילה מעלה את כמות ההופעות שלה ואז בעצם בודק עם הרשימה אם זה הפעם ה3 שהוכנסה אם כן מצבע עצירה אם לא מכניס את המילה וממשיך.
+
+word_list = []  # List for the  words entered 
+while True:
+    word = input("Please type a word: ").strip().lower()  # Normalize input (remove spaces, lowercase)
+    count = word_list.count(word) + 1  #  Count occurrences of the word in the list+1 because add it to the list
+    if count == 3:  # Stop if the word appears three times
+        print(f"You entered the word '{word}' three times. Goodbye...")
+        break
+    word_list.append(word)  # Add word to the list
+
+
+
+
+
+Exercise 4: Compare Lists by Count of Large Numbers
+
+משווה בין 2 רשימות
+באיזה רשימה יש מספרים גדולים יותר של השוואה של תא מול תא 
+list1 = [3, 5, 30, 0] 
+list2 = [1000, 5, 29, -5]  
+# Count how many numbers in each list are larger than numbers in the other list
+larger_in_list1 = sum(1 for num1 in list1 for num2 in list2 if num1 > num2)
+larger_in_list2 = sum(1 for num2 in list2 for num1 in list1 if num2 > num1)
+if larger_in_list1 > larger_in_list2:
+    print("List 1 contains more larger numbers compared to List 2.") # Print the results
+elif larger_in_list2 > larger_in_list1:
+    print("List 2 contains more larger numbers compared to List 1.") # Print the results
+else:
+    print("Both lists contain the same number of larger numbers.") # Print the results
+
+CHALLENGE SECTION
+היה מאתגר מאוד!!!
+יש לאתגר הזה 2 דרכים שמצאתי כי אתגרתי את עצמי והן היו נראות לי מאוד דומות ברעיון
+לחתוך את הרשימות עפ הגודל של הקצרה מבניהן ואז בעצם הרשימה הקצרה תהיה מלאה והארוכה נגיע עד לתא של גודל הרשימה הקצרה 
+ למצוא גודל רשימה קטנה יותר  ולרוץ על פני 2 הרשימות עד לאורך הרשימה הקצרה יותר
+בשתי הדרכים נצליח למצוא את הנדרש
+list1 = [3, 5, 30, 0, 50, 60, 70, 80]  
+list2 = [1000, 5, 29, -5] 
+min_length = min(len(list1), len(list2))# length of the shorter list
+# cut both lists to compare only the first 'min_length' elements
+short_list1 = list1[:min_length]
+short_list2 = list2[:min_length]
+# Count how many numbers in each cut list are bigger
+count1 = 0  
+count2 = 0  
+for i in range(min_length):  # Compare only the first min_length elements
+    if short_list1[i] > short_list2[i]:
+        count1 += 1
+    elif short_list2[i] > short_list1[i]:
+        count2 += 1
+if count1 > count2:
+    print("List 1 contains more larger numbers compared to List 2 (considering only the first", min_length, "elements).") # Print the results
+elif count2 > count1:
+    print("List 2 contains more larger numbers compared to List 1 (considering only the first", min_length, "elements).")# Print the results
+else:
+    print("Both lists contain the same number of larger numbers (considering only the first", min_length, "elements).")# Print the results
+
+
+
+
+
+
+
+list1 = [3, 5, 30, 0, 50, 60, 70, 80]  
+list2 = [1000, 5, 29, -5]  
+min_length = min(len(list1), len(list2))#find length of the shorter list
+count1 = 0  
+count2 = 0 
+for index in range(min_length):# loop goes until the length of the shorter list
+    if list1[index] > list2[index]:
+        count1 += 1
+    elif list2[index] > list1[index]:
+        count2 += 1
+if count1 > count2:
+    print(f"List 1 has more larger numbers than List 2 (considering the first {min_length} elements).")# Print the results
+elif count2 > count1:
+    print(f"List 2 has more larger numbers than List 1 (considering the first {min_length} elements).")# Print the results
+else:
+    print(f"Both lists have the same count of larger numbers (considering the first {min_length} elements).")# Print the results
+
+
+
+
+
+
